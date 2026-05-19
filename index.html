@@ -1,102 +1,151 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" data-theme="light">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Espacio Zubex</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
+/* ══ LIGHT THEME (default) ══ */
 :root {
+  --zx-bg: #f4f6fb;
+  --zx-surface: #ffffff;
+  --zx-surface2: #f0f2f8;
+  --zx-border: rgba(0,0,0,0.07);
+  --zx-border2: rgba(0,0,0,0.12);
+  --zx-text: #111827;
+  --zx-muted: #6b7280;
+  --zx-dim: #9ca3af;
+  --zx-blue: #2563eb;
+  --zx-blue-dim: rgba(37,99,235,0.09);
+  --zx-teal: #0d9488;
+  --zx-teal-dim: rgba(13,148,136,0.09);
+  --zx-amber: #d97706;
+  --zx-amber-dim: rgba(217,119,6,0.09);
+  --zx-coral: #ea580c;
+  --zx-coral-dim: rgba(234,88,12,0.09);
+  --zx-purple: #7c3aed;
+  --zx-purple-dim: rgba(124,58,237,0.09);
+  --zx-green: #16a34a;
+  --zx-green-dim: rgba(22,163,74,0.09);
+  --zx-red: #dc2626;
+  --zx-red-dim: rgba(220,38,38,0.09);
+  --zx-shadow: 0 1px 3px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.04);
+  --zx-shadow-md: 0 4px 16px rgba(0,0,0,0.08);
+  --radius: 12px;
+  --radius-sm: 8px;
+  --login-grid-color: rgba(37,99,235,0.06);
+  --login-glow: rgba(37,99,235,0.07);
+  --login-card-shadow: 0 8px 40px rgba(0,0,0,0.12);
+  --dash-welcome-bg: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+  --dash-welcome-border: rgba(37,99,235,0.15);
+  --hover-bg: #f8f9fc;
+}
+
+/* ══ DARK THEME ══ */
+[data-theme="dark"] {
   --zx-bg: #0d0f14;
   --zx-surface: #151820;
   --zx-surface2: #1c2030;
   --zx-border: rgba(255,255,255,0.07);
-  --zx-border2: rgba(255,255,255,0.12);
+  --zx-border2: rgba(255,255,255,0.13);
   --zx-text: #eef0f6;
   --zx-muted: #7a8099;
   --zx-dim: #4a5068;
   --zx-blue: #3b82f6;
-  --zx-blue-dim: rgba(59,130,246,0.12);
-  --zx-blue-glow: rgba(59,130,246,0.25);
+  --zx-blue-dim: rgba(59,130,246,0.13);
   --zx-teal: #14b8a6;
-  --zx-teal-dim: rgba(20,184,166,0.12);
+  --zx-teal-dim: rgba(20,184,166,0.13);
   --zx-amber: #f59e0b;
-  --zx-amber-dim: rgba(245,158,11,0.12);
+  --zx-amber-dim: rgba(245,158,11,0.13);
   --zx-coral: #f97316;
-  --zx-coral-dim: rgba(249,115,22,0.12);
+  --zx-coral-dim: rgba(249,115,22,0.13);
   --zx-purple: #a78bfa;
-  --zx-purple-dim: rgba(167,139,250,0.12);
+  --zx-purple-dim: rgba(167,139,250,0.13);
   --zx-green: #22c55e;
   --zx-green-dim: rgba(34,197,94,0.1);
   --zx-red: #ef4444;
   --zx-red-dim: rgba(239,68,68,0.1);
+  --zx-shadow: 0 1px 3px rgba(0,0,0,0.4);
+  --zx-shadow-md: 0 4px 20px rgba(0,0,0,0.5);
   --radius: 12px;
   --radius-sm: 8px;
+  --login-grid-color: rgba(59,130,246,0.04);
+  --login-glow: rgba(59,130,246,0.08);
+  --login-card-shadow: 0 0 60px rgba(0,0,0,0.5);
+  --dash-welcome-bg: linear-gradient(135deg,#1a2540 0%,#151c30 100%);
+  --dash-welcome-border: rgba(59,130,246,0.2);
+  --hover-bg: #1c2030;
 }
+
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html, body { height: 100%; font-family: 'DM Sans', sans-serif; background: var(--zx-bg); color: var(--zx-text); font-size: 15px; }
+html, body { height: 100%; font-family: 'Plus Jakarta Sans', sans-serif; background: var(--zx-bg); color: var(--zx-text); font-size: 15px; transition: background 0.25s, color 0.25s; }
 input, select, textarea, button { font-family: inherit; }
 
-/* SCROLLBAR */
 ::-webkit-scrollbar { width: 6px; }
 ::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb { background: var(--zx-border2); border-radius: 3px; }
 
-/* ── SCREENS ── */
 .screen { display: none; min-height: 100vh; }
 .screen.active { display: flex; }
 
-/* ══════════════════════════════
-   LOGIN SCREEN
-══════════════════════════════ */
+/* ══ THEME TOGGLE ══ */
+.theme-toggle {
+  position: fixed; top: 16px; right: 16px; z-index: 9999;
+  width: 38px; height: 38px;
+  background: var(--zx-surface);
+  border: 1px solid var(--zx-border2);
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: var(--zx-shadow);
+  transition: background 0.2s, border-color 0.2s, transform 0.15s;
+  color: var(--zx-muted);
+  font-size: 16px;
+}
+.theme-toggle:hover { transform: scale(1.08); color: var(--zx-text); }
+.icon-sun, .icon-moon { width: 18px; height: 18px; display: block; }
+[data-theme="light"] .icon-moon { display: none; }
+[data-theme="dark"] .icon-sun { display: none; }
+[data-theme="dark"] .icon-moon { display: block; }
+
+/* ══ LOGIN ══ */
 #screen-login {
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  position: relative;
-  overflow: hidden;
+  align-items: center; justify-content: center; flex-direction: column;
+  position: relative; overflow: hidden;
 }
 .login-grid {
   position: absolute; inset: 0;
   background-image:
-    linear-gradient(rgba(59,130,246,0.04) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(59,130,246,0.04) 1px, transparent 1px);
+    linear-gradient(var(--login-grid-color) 1px, transparent 1px),
+    linear-gradient(90deg, var(--login-grid-color) 1px, transparent 1px);
   background-size: 48px 48px;
   mask-image: radial-gradient(ellipse 70% 70% at 50% 50%, black, transparent);
 }
 .login-glow {
-  position: absolute;
-  width: 500px; height: 500px;
-  background: radial-gradient(circle, rgba(59,130,246,0.08) 0%, transparent 70%);
-  top: 50%; left: 50%; transform: translate(-50%, -50%);
+  position: absolute; width: 500px; height: 500px;
+  background: radial-gradient(circle, var(--login-glow) 0%, transparent 70%);
+  top: 50%; left: 50%; transform: translate(-50%,-50%);
   pointer-events: none;
 }
 .login-card {
-  position: relative; z-index: 1;
-  width: 380px;
+  position: relative; z-index: 1; width: 380px;
   background: var(--zx-surface);
   border: 1px solid var(--zx-border2);
-  border-radius: 20px;
-  padding: 2.5rem 2rem;
-  box-shadow: 0 0 60px rgba(0,0,0,0.5);
+  border-radius: 20px; padding: 2.5rem 2rem;
+  box-shadow: var(--login-card-shadow);
+  transition: background 0.25s, border-color 0.25s;
 }
-.login-logo {
-  display: flex; align-items: center; gap: 10px;
-  margin-bottom: 2rem;
-}
+.login-logo { display: flex; align-items: center; gap: 10px; margin-bottom: 2rem; }
 .login-logo-mark {
-  width: 40px; height: 40px;
-  background: var(--zx-blue);
-  border-radius: 10px;
-  display: flex; align-items: center; justify-content: center;
-  font-weight: 600; font-size: 14px; color: #fff;
-  letter-spacing: -0.5px;
+  width: 40px; height: 40px; background: var(--zx-blue);
+  border-radius: 10px; display: flex; align-items: center; justify-content: center;
+  font-weight: 600; font-size: 14px; color: #fff; letter-spacing: -0.5px;
 }
-.login-logo-text { line-height: 1.2; }
 .login-logo-text strong { display: block; font-size: 16px; font-weight: 600; }
-.login-logo-text span { font-size: 12px; color: var(--zx-muted); font-weight: 400; }
+.login-logo-text span { font-size: 12px; color: var(--zx-muted); }
 .login-title { font-size: 22px; font-weight: 600; margin-bottom: 6px; }
 .login-sub { font-size: 13px; color: var(--zx-muted); margin-bottom: 2rem; }
 .login-btn {
@@ -105,98 +154,92 @@ input, select, textarea, button { font-family: inherit; }
   border: 1px solid var(--zx-border2);
   background: var(--zx-surface2);
   color: var(--zx-text);
-  font-size: 14px; font-weight: 500;
-  cursor: pointer;
-  display: flex; align-items: center; gap: 10px;
-  margin-bottom: 10px;
+  font-size: 14px; font-weight: 500; cursor: pointer;
+  display: flex; align-items: center; gap: 10px; margin-bottom: 10px;
   transition: background 0.15s, border-color 0.15s;
 }
-.login-btn:hover { background: #232840; border-color: rgba(255,255,255,0.18); }
+.login-btn:hover { background: var(--hover-bg); border-color: var(--zx-blue); }
 .login-btn svg { width: 18px; height: 18px; flex-shrink: 0; }
-.login-divider { text-align: center; font-size: 12px; color: var(--zx-dim); margin: 1.2rem 0; position: relative; }
+.login-divider {
+  text-align: center; font-size: 12px; color: var(--zx-dim); margin: 1.2rem 0; position: relative;
+}
 .login-divider::before, .login-divider::after {
-  content: ''; position: absolute; top: 50%;
-  width: 40%; height: 1px; background: var(--zx-border);
+  content: ''; position: absolute; top: 50%; width: 40%; height: 1px; background: var(--zx-border);
 }
 .login-divider::before { left: 0; }
 .login-divider::after { right: 0; }
 .login-demo { font-size: 12px; color: var(--zx-dim); text-align: center; margin-top: 1.5rem; }
 .login-demo a { color: var(--zx-blue); text-decoration: none; cursor: pointer; }
+.login-demo a:hover { text-decoration: underline; }
 
-/* ══════════════════════════════
-   MAIN APP
-══════════════════════════════ */
+/* ══ LAYOUT ══ */
 #screen-app { flex-direction: row; }
 
-/* SIDEBAR */
+/* ══ SIDEBAR ══ */
 .sidebar {
-  width: 220px; flex-shrink: 0;
+  width: 224px; flex-shrink: 0;
   background: var(--zx-surface);
   border-right: 1px solid var(--zx-border);
   display: flex; flex-direction: column;
   padding: 1.25rem 0;
   position: sticky; top: 0; height: 100vh;
+  transition: background 0.25s, border-color 0.25s;
+  box-shadow: var(--zx-shadow);
 }
 .sb-logo {
   display: flex; align-items: center; gap: 9px;
   padding: 0 1.25rem 1.25rem;
-  border-bottom: 1px solid var(--zx-border);
-  margin-bottom: 1rem;
+  border-bottom: 1px solid var(--zx-border); margin-bottom: 1rem;
 }
 .sb-logo-mark {
-  width: 32px; height: 32px;
-  background: var(--zx-blue);
-  border-radius: 8px;
-  display: flex; align-items: center; justify-content: center;
+  width: 32px; height: 32px; background: var(--zx-blue);
+  border-radius: 8px; display: flex; align-items: center; justify-content: center;
   font-weight: 600; font-size: 12px; color: #fff;
 }
 .sb-logo-text strong { display: block; font-size: 14px; font-weight: 600; line-height: 1.2; }
 .sb-logo-text span { font-size: 11px; color: var(--zx-muted); }
 .sb-section { padding: 0 0.75rem; margin-bottom: 0.5rem; }
 .sb-section-label {
-  font-size: 10px; font-weight: 600;
-  color: var(--zx-dim);
+  font-size: 10px; font-weight: 600; color: var(--zx-dim);
   text-transform: uppercase; letter-spacing: 0.08em;
   padding: 0 0.5rem; margin-bottom: 4px;
 }
 .sb-item {
   display: flex; align-items: center; gap: 9px;
-  padding: 8px 10px;
-  border-radius: var(--radius-sm);
-  cursor: pointer;
-  font-size: 13.5px; font-weight: 400;
+  padding: 8px 10px; border-radius: var(--radius-sm);
+  cursor: pointer; font-size: 13.5px; font-weight: 400;
   color: var(--zx-muted);
   transition: background 0.12s, color 0.12s;
-  margin-bottom: 2px;
-  border: none; background: none; width: 100%; text-align: left;
+  margin-bottom: 2px; border: none; background: none; width: 100%; text-align: left;
 }
 .sb-item:hover { background: var(--zx-surface2); color: var(--zx-text); }
 .sb-item.active { background: var(--zx-blue-dim); color: var(--zx-blue); font-weight: 500; }
-.sb-item svg { width: 16px; height: 16px; flex-shrink: 0; opacity: 0.8; }
+.sb-item svg { width: 16px; height: 16px; flex-shrink: 0; opacity: 0.75; }
 .sb-item.active svg { opacity: 1; }
 .sb-spacer { flex: 1; }
 .sb-user {
-  margin: 0 0.75rem;
-  padding: 10px;
-  border-radius: var(--radius-sm);
-  border: 1px solid var(--zx-border);
+  margin: 0 0.75rem; padding: 10px;
+  border-radius: var(--radius-sm); border: 1px solid var(--zx-border);
   display: flex; align-items: center; gap: 8px;
+  background: var(--zx-surface2);
 }
 .sb-user-avatar {
   width: 30px; height: 30px; border-radius: 50%;
   background: var(--zx-blue-dim);
   display: flex; align-items: center; justify-content: center;
-  font-size: 11px; font-weight: 600; color: var(--zx-blue);
-  flex-shrink: 0;
+  font-size: 11px; font-weight: 600; color: var(--zx-blue); flex-shrink: 0;
 }
 .sb-user-info { flex: 1; min-width: 0; }
 .sb-user-name { font-size: 12px; font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .sb-user-role { font-size: 10px; color: var(--zx-muted); }
-.sb-logout { cursor: pointer; color: var(--zx-dim); padding: 3px; border-radius: 4px; transition: color 0.12s; background: none; border: none; }
+.sb-logout {
+  cursor: pointer; color: var(--zx-dim); padding: 3px;
+  border-radius: 4px; transition: color 0.12s; background: none; border: none;
+}
 .sb-logout:hover { color: var(--zx-red); }
 .sb-logout svg { width: 14px; height: 14px; display: block; }
 
-/* MAIN CONTENT */
+/* ══ MAIN ══ */
 .main { flex: 1; overflow-y: auto; }
 .view { display: none; padding: 2rem 2.5rem; max-width: 1100px; }
 .view.active { display: block; }
@@ -204,60 +247,56 @@ input, select, textarea, button { font-family: inherit; }
 .view-header h1 { font-size: 22px; font-weight: 600; margin-bottom: 4px; }
 .view-header p { font-size: 13px; color: var(--zx-muted); }
 
-/* ── DASHBOARD ── */
+/* ══ DASHBOARD ══ */
 .dash-welcome {
-  background: linear-gradient(135deg, #1a2540 0%, #151c30 100%);
-  border: 1px solid rgba(59,130,246,0.2);
-  border-radius: var(--radius);
-  padding: 1.5rem 2rem;
-  margin-bottom: 2rem;
-  display: flex; align-items: center; justify-content: space-between;
+  background: var(--dash-welcome-bg);
+  border: 1px solid var(--dash-welcome-border);
+  border-radius: var(--radius); padding: 1.5rem 2rem;
+  margin-bottom: 2rem; display: flex; align-items: center; justify-content: space-between;
 }
 .dash-welcome-text h2 { font-size: 20px; font-weight: 600; margin-bottom: 4px; }
 .dash-welcome-text p { font-size: 13px; color: var(--zx-muted); }
-.dash-date { font-family: 'DM Mono', monospace; font-size: 12px; color: var(--zx-blue); background: var(--zx-blue-dim); padding: 6px 12px; border-radius: 99px; }
+.dash-date {
+  font-family: 'DM Mono', monospace; font-size: 12px;
+  color: var(--zx-blue); background: var(--zx-blue-dim);
+  padding: 6px 12px; border-radius: 99px; white-space: nowrap;
+}
 .apps-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 14px; margin-bottom: 2rem; }
 .app-card {
-  background: var(--zx-surface);
-  border: 1px solid var(--zx-border);
-  border-radius: var(--radius);
-  padding: 1.25rem;
-  cursor: pointer;
+  background: var(--zx-surface); border: 1px solid var(--zx-border);
+  border-radius: var(--radius); padding: 1.25rem; cursor: pointer;
   transition: border-color 0.15s, transform 0.15s, box-shadow 0.15s;
-  text-decoration: none; color: inherit;
-  display: block;
+  box-shadow: var(--zx-shadow);
 }
-.app-card:hover { border-color: var(--zx-border2); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.3); }
+.app-card:hover { border-color: var(--zx-blue); transform: translateY(-2px); box-shadow: var(--zx-shadow-md); }
 .app-card-icon {
   width: 44px; height: 44px; border-radius: 11px;
-  display: flex; align-items: center; justify-content: center;
-  margin-bottom: 1rem;
+  display: flex; align-items: center; justify-content: center; margin-bottom: 1rem;
 }
 .app-card-icon svg { width: 22px; height: 22px; }
 .app-card h3 { font-size: 15px; font-weight: 500; margin-bottom: 5px; }
 .app-card p { font-size: 12px; color: var(--zx-muted); line-height: 1.5; margin-bottom: 1rem; }
 .app-card-footer { display: flex; align-items: center; justify-content: space-between; }
-.badge {
-  font-size: 10px; font-weight: 500;
-  padding: 3px 9px; border-radius: 99px;
-  font-family: 'DM Mono', monospace;
-}
+.badge { font-size: 10px; font-weight: 500; padding: 3px 9px; border-radius: 99px; font-family: 'DM Mono', monospace; }
 .badge-active { background: var(--zx-green-dim); color: var(--zx-green); }
-.badge-admin { background: var(--zx-blue-dim); color: var(--zx-blue); }
-.badge-soon { background: rgba(255,255,255,0.04); color: var(--zx-dim); }
+.badge-soon { background: var(--zx-surface2); color: var(--zx-dim); }
 .app-card-arrow { color: var(--zx-dim); transition: color 0.12s, transform 0.12s; }
-.app-card:hover .app-card-arrow { color: var(--zx-text); transform: translateX(3px); }
+.app-card:hover .app-card-arrow { color: var(--zx-blue); transform: translateX(3px); }
 .app-card-arrow svg { width: 16px; height: 16px; }
 
-/* ── CODIFICACION ERP ── */
-.erp-grid { display: grid; grid-template-columns: 1fr 340px; gap: 1.5rem; align-items: start; }
+/* ══ CARDS ══ */
 .card {
-  background: var(--zx-surface);
-  border: 1px solid var(--zx-border);
-  border-radius: var(--radius);
-  padding: 1.5rem;
+  background: var(--zx-surface); border: 1px solid var(--zx-border);
+  border-radius: var(--radius); padding: 1.5rem;
+  box-shadow: var(--zx-shadow); transition: background 0.25s;
 }
-.card-title { font-size: 14px; font-weight: 600; margin-bottom: 1.25rem; color: var(--zx-muted); text-transform: uppercase; letter-spacing: 0.06em; font-size: 11px; }
+.card-title {
+  font-size: 11px; font-weight: 600; color: var(--zx-muted);
+  text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 1.25rem;
+}
+
+/* ══ FORMS ══ */
+.erp-grid { display: grid; grid-template-columns: 1fr 340px; gap: 1.5rem; align-items: start; }
 .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
 .form-group { margin-bottom: 1rem; }
 .form-group label { display: block; font-size: 12px; color: var(--zx-muted); margin-bottom: 6px; font-weight: 500; }
@@ -266,11 +305,10 @@ input, select, textarea, button { font-family: inherit; }
 .form-group textarea {
   width: 100%; padding: 9px 12px;
   background: var(--zx-surface2);
-  border: 1px solid var(--zx-border);
+  border: 1px solid var(--zx-border2);
   border-radius: var(--radius-sm);
   color: var(--zx-text); font-size: 13.5px;
-  transition: border-color 0.15s;
-  outline: none;
+  transition: border-color 0.15s, background 0.25s; outline: none;
 }
 .form-group input:focus,
 .form-group select:focus,
@@ -279,34 +317,29 @@ input, select, textarea, button { font-family: inherit; }
 .form-group textarea { resize: vertical; min-height: 80px; }
 .form-group input::placeholder,
 .form-group textarea::placeholder { color: var(--zx-dim); }
+
+/* ══ BUTTONS ══ */
 .btn-primary {
-  padding: 10px 20px;
-  background: var(--zx-blue);
-  color: #fff; border: none;
-  border-radius: var(--radius-sm);
-  font-size: 14px; font-weight: 500;
-  cursor: pointer;
-  transition: opacity 0.15s;
+  padding: 10px 20px; background: var(--zx-blue); color: #fff;
+  border: none; border-radius: var(--radius-sm); font-size: 14px; font-weight: 500;
+  cursor: pointer; transition: opacity 0.15s, transform 0.1s;
   display: inline-flex; align-items: center; gap: 8px;
 }
-.btn-primary:hover { opacity: 0.88; }
+.btn-primary:hover { opacity: 0.88; transform: translateY(-1px); }
 .btn-secondary {
-  padding: 10px 20px;
-  background: transparent;
-  color: var(--zx-muted); border: 1px solid var(--zx-border);
-  border-radius: var(--radius-sm);
-  font-size: 14px; font-weight: 500;
-  cursor: pointer;
-  transition: background 0.15s, color 0.15s;
+  padding: 10px 20px; background: transparent;
+  color: var(--zx-muted); border: 1px solid var(--zx-border2);
+  border-radius: var(--radius-sm); font-size: 14px; font-weight: 500;
+  cursor: pointer; transition: background 0.15s, color 0.15s;
 }
 .btn-secondary:hover { background: var(--zx-surface2); color: var(--zx-text); }
 .btn-row { display: flex; gap: 10px; margin-top: 1.5rem; }
+
+/* ══ SOLICITUDES ══ */
 .solicitudes-list { display: flex; flex-direction: column; gap: 10px; }
 .sol-item {
-  padding: 12px 14px;
-  background: var(--zx-surface2);
-  border-radius: var(--radius-sm);
-  border-left: 3px solid transparent;
+  padding: 12px 14px; background: var(--zx-surface2);
+  border-radius: var(--radius-sm); border-left: 3px solid transparent;
 }
 .sol-item.pending { border-left-color: var(--zx-amber); }
 .sol-item.approved { border-left-color: var(--zx-green); }
@@ -314,10 +347,10 @@ input, select, textarea, button { font-family: inherit; }
 .sol-item-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px; }
 .sol-item-code { font-family: 'DM Mono', monospace; font-size: 12px; color: var(--zx-blue); }
 .sol-item-status { font-size: 10px; font-weight: 500; font-family: 'DM Mono', monospace; }
-.sol-item-desc { font-size: 12px; color: var(--zx-muted); }
+.sol-item-desc { font-size: 12px; color: var(--zx-text); }
 .sol-item-meta { font-size: 11px; color: var(--zx-dim); margin-top: 4px; }
 
-/* ── ADMIN USERS ── */
+/* ══ USERS TABLE ══ */
 .users-table { width: 100%; border-collapse: collapse; }
 .users-table th {
   text-align: left; font-size: 11px; font-weight: 600;
@@ -326,7 +359,7 @@ input, select, textarea, button { font-family: inherit; }
 }
 .users-table td { padding: 12px 14px; border-bottom: 1px solid var(--zx-border); font-size: 13.5px; vertical-align: middle; }
 .users-table tr:last-child td { border-bottom: none; }
-.users-table tr:hover td { background: var(--zx-surface2); }
+.users-table tbody tr:hover td { background: var(--zx-surface2); }
 .user-cell { display: flex; align-items: center; gap: 10px; }
 .user-cell-avatar {
   width: 32px; height: 32px; border-radius: 50%;
@@ -336,43 +369,54 @@ input, select, textarea, button { font-family: inherit; }
 .user-cell-name { font-weight: 500; font-size: 13.5px; }
 .user-cell-email { font-size: 11px; color: var(--zx-muted); }
 .role-badge-admin { background: var(--zx-blue-dim); color: var(--zx-blue); padding: 3px 10px; border-radius: 99px; font-size: 11px; font-weight: 500; font-family: 'DM Mono', monospace; }
-.role-badge-user { background: rgba(255,255,255,0.04); color: var(--zx-muted); padding: 3px 10px; border-radius: 99px; font-size: 11px; font-weight: 500; font-family: 'DM Mono', monospace; }
+.role-badge-user { background: var(--zx-surface2); color: var(--zx-muted); padding: 3px 10px; border-radius: 99px; font-size: 11px; font-weight: 500; font-family: 'DM Mono', monospace; }
 .btn-role-toggle {
   padding: 5px 12px; border-radius: 6px;
-  border: 1px solid var(--zx-border);
-  background: transparent; color: var(--zx-muted);
-  font-size: 12px; cursor: pointer;
+  border: 1px solid var(--zx-border2); background: transparent;
+  color: var(--zx-muted); font-size: 12px; cursor: pointer;
   transition: background 0.12s, color 0.12s;
 }
 .btn-role-toggle:hover { background: var(--zx-surface2); color: var(--zx-text); }
 
-/* ── TOAST ── */
+/* ══ EXT APPS ══ */
+.ext-apps-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 14px; }
+.ext-card {
+  background: var(--zx-surface); border: 1px solid var(--zx-border);
+  border-radius: var(--radius); padding: 1.5rem; text-align: center; cursor: pointer;
+  transition: border-color 0.15s, transform 0.15s, box-shadow 0.15s;
+  box-shadow: var(--zx-shadow);
+}
+.ext-card:hover { border-color: var(--zx-blue); transform: translateY(-2px); box-shadow: var(--zx-shadow-md); }
+.ext-card-icon { width: 52px; height: 52px; border-radius: 14px; margin: 0 auto 12px; display: flex; align-items: center; justify-content: center; }
+.ext-card-icon svg { width: 26px; height: 26px; }
+.ext-card h3 { font-size: 14px; font-weight: 500; margin-bottom: 6px; }
+.ext-card p { font-size: 12px; color: var(--zx-muted); }
+
+/* ══ TOAST ══ */
 .toast-container { position: fixed; bottom: 1.5rem; right: 1.5rem; z-index: 9999; display: flex; flex-direction: column; gap: 8px; }
 .toast {
   padding: 12px 18px; border-radius: var(--radius-sm);
   font-size: 13px; font-weight: 500;
-  background: var(--zx-surface2); border: 1px solid var(--zx-border2);
-  color: var(--zx-text);
-  animation: slideIn 0.25s ease;
+  background: var(--zx-surface); border: 1px solid var(--zx-border2);
+  color: var(--zx-text); box-shadow: var(--zx-shadow-md);
+  animation: slideIn 0.22s ease;
   display: flex; align-items: center; gap: 8px;
 }
-.toast.success { border-color: rgba(34,197,94,0.3); }
-.toast.error { border-color: rgba(239,68,68,0.3); }
-@keyframes slideIn { from { opacity: 0; transform: translateX(20px); } to { opacity: 1; transform: translateX(0); } }
+.toast.success { border-color: var(--zx-green); }
+.toast.error { border-color: var(--zx-red); }
+@keyframes slideIn { from { opacity:0; transform:translateX(20px); } to { opacity:1; transform:translateX(0); } }
 
-/* ── MODAL ── */
+/* ══ MODAL ══ */
 .modal-overlay {
   position: fixed; inset: 0; z-index: 1000;
-  background: rgba(0,0,0,0.6);
+  background: rgba(0,0,0,0.35);
   display: none; align-items: center; justify-content: center;
 }
 .modal-overlay.open { display: flex; }
 .modal {
-  background: var(--zx-surface);
-  border: 1px solid var(--zx-border2);
-  border-radius: var(--radius);
-  padding: 1.75rem;
-  width: 460px; max-width: 95vw;
+  background: var(--zx-surface); border: 1px solid var(--zx-border2);
+  border-radius: var(--radius); padding: 1.75rem;
+  width: 460px; max-width: 95vw; box-shadow: var(--zx-shadow-md);
 }
 .modal-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.25rem; }
 .modal-header h3 { font-size: 16px; font-weight: 600; }
@@ -380,38 +424,39 @@ input, select, textarea, button { font-family: inherit; }
 .modal-close:hover { color: var(--zx-text); }
 .modal-close svg { width: 18px; height: 18px; display: block; }
 
-/* EMPTY STATE */
-.empty { text-align: center; padding: 3rem 1rem; color: var(--zx-dim); }
-.empty svg { width: 40px; height: 40px; margin: 0 auto 1rem; opacity: 0.4; display: block; }
+/* ══ EMPTY ══ */
+.empty { text-align: center; padding: 2.5rem 1rem; color: var(--zx-dim); }
+.empty svg { width: 36px; height: 36px; margin: 0 auto 0.75rem; opacity: 0.35; display: block; }
 .empty p { font-size: 13px; }
 
-/* APP EXTERNAL LINKS */
-.ext-apps-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 14px; }
-.ext-card {
-  background: var(--zx-surface);
-  border: 1px solid var(--zx-border);
-  border-radius: var(--radius);
-  padding: 1.5rem;
-  text-align: center;
-  cursor: pointer;
-  transition: border-color 0.15s, transform 0.15s;
-}
-.ext-card:hover { border-color: var(--zx-border2); transform: translateY(-2px); }
-.ext-card-icon { width: 52px; height: 52px; border-radius: 14px; margin: 0 auto 12px; display: flex; align-items: center; justify-content: center; }
-.ext-card-icon svg { width: 26px; height: 26px; }
-.ext-card h3 { font-size: 14px; font-weight: 500; margin-bottom: 6px; }
-.ext-card p { font-size: 12px; color: var(--zx-muted); }
-
-/* ADMIN-ONLY INDICATOR */
+/* ══ ADMIN ══ */
 .admin-only { display: none; }
 body.is-admin .admin-only { display: block; }
 body.is-admin .admin-only-flex { display: flex; }
 .admin-only-flex { display: none; }
+
+/* ══ URL CONFIG ══ */
+.url-config-card { margin-top: 1.5rem; max-width: 500px; }
 </style>
 </head>
 <body>
 
-<!-- ══════════ LOGIN ══════════ -->
+<!-- THEME TOGGLE (always visible) -->
+<button class="theme-toggle" onclick="toggleTheme()" title="Cambiar tema" aria-label="Cambiar tema claro/oscuro">
+  <!-- Sun icon (shown in light mode) -->
+  <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+    <circle cx="12" cy="12" r="4"/><line x1="12" y1="2" x2="12" y2="4"/><line x1="12" y1="20" x2="12" y2="22"/>
+    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+    <line x1="2" y1="12" x2="4" y2="12"/><line x1="20" y1="12" x2="22" y2="12"/>
+    <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+  </svg>
+  <!-- Moon icon (shown in dark mode) -->
+  <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+  </svg>
+</button>
+
+<!-- ══ LOGIN ══ -->
 <div id="screen-login" class="screen active">
   <div class="login-grid"></div>
   <div class="login-glow"></div>
@@ -425,7 +470,6 @@ body.is-admin .admin-only-flex { display: flex; }
     </div>
     <h2 class="login-title">Bienvenido</h2>
     <p class="login-sub">Inicia sesión con tu cuenta corporativa para continuar.</p>
-
     <button class="login-btn" onclick="loginWith('google')">
       <svg viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
       Continuar con Google
@@ -434,16 +478,15 @@ body.is-admin .admin-only-flex { display: flex; }
       <svg viewBox="0 0 24 24"><rect x="1" y="1" width="10" height="10" fill="#f25022"/><rect x="13" y="1" width="10" height="10" fill="#7fba00"/><rect x="1" y="13" width="10" height="10" fill="#00a4ef"/><rect x="13" y="13" width="10" height="10" fill="#ffb900"/></svg>
       Continuar con Microsoft
     </button>
-
     <div class="login-divider">o</div>
-    <p style="font-size:12px; color:var(--zx-dim); text-align:center;">
+    <p style="font-size:12px;color:var(--zx-dim);text-align:center;">
       Usa tu correo <strong style="color:var(--zx-muted)">@zubex.com.mx</strong><br>para acceder al portal
     </p>
     <p class="login-demo">Demo: <a onclick="loginDemo('admin')">entrar como Admin</a> · <a onclick="loginDemo('user')">entrar como Usuario</a></p>
   </div>
 </div>
 
-<!-- ══════════ APP ══════════ -->
+<!-- ══ APP ══ -->
 <div id="screen-app" class="screen">
 
   <!-- SIDEBAR -->
@@ -455,45 +498,40 @@ body.is-admin .admin-only-flex { display: flex; }
         <span>Portal ERP</span>
       </div>
     </div>
-
     <div class="sb-section">
       <div class="sb-section-label">Principal</div>
-      <button class="sb-item active" onclick="showView('dashboard', this)">
+      <button class="sb-item active" onclick="showView('dashboard',this)">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
         Dashboard
       </button>
     </div>
-
     <div class="sb-section">
       <div class="sb-section-label">Herramientas</div>
-      <button class="sb-item" onclick="showView('vacaciones', this)">
+      <button class="sb-item" onclick="showView('vacaciones',this)">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
         Vacaciones
       </button>
-      <button class="sb-item" onclick="showView('kaizen', this)">
+      <button class="sb-item" onclick="showView('kaizen',this)">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
         Kaizen
       </button>
-      <button class="sb-item" onclick="showView('refacciones', this)">
+      <button class="sb-item" onclick="showView('refacciones',this)">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>
         Refacciones
       </button>
-      <button class="sb-item" onclick="showView('erp', this)">
+      <button class="sb-item" onclick="showView('erp',this)">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
         Codificación ERP
       </button>
     </div>
-
     <div class="sb-section admin-only">
       <div class="sb-section-label">Administración</div>
-      <button class="sb-item" onclick="showView('usuarios', this)">
+      <button class="sb-item" onclick="showView('usuarios',this)">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
         Usuarios
       </button>
     </div>
-
     <div class="sb-spacer"></div>
-
     <div class="sb-user">
       <div class="sb-user-avatar" id="sb-avatar">JG</div>
       <div class="sb-user-info">
@@ -506,10 +544,10 @@ body.is-admin .admin-only-flex { display: flex; }
     </div>
   </aside>
 
-  <!-- MAIN -->
+  <!-- MAIN CONTENT -->
   <main class="main">
 
-    <!-- ── DASHBOARD ── -->
+    <!-- DASHBOARD -->
     <div id="view-dashboard" class="view active">
       <div class="dash-welcome">
         <div class="dash-welcome-text">
@@ -518,15 +556,11 @@ body.is-admin .admin-only-flex { display: flex; }
         </div>
         <div class="dash-date" id="dash-date">—</div>
       </div>
-
-      <div class="view-header">
-        <p style="font-size:11px; font-weight:600; color:var(--zx-dim); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:12px;">Mis aplicaciones</p>
-      </div>
-
+      <p style="font-size:11px;font-weight:600;color:var(--zx-dim);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:12px;">Mis aplicaciones</p>
       <div class="apps-grid">
-        <div class="app-card" onclick="showView('vacaciones', null)">
+        <div class="app-card" onclick="showView('vacaciones',null)">
           <div class="app-card-icon" style="background:var(--zx-blue-dim)">
-            <svg viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="var(--zx-blue)" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
           </div>
           <h3>VacaManager</h3>
           <p>Solicitudes y aprobación de vacaciones para todo el personal</p>
@@ -535,10 +569,9 @@ body.is-admin .admin-only-flex { display: flex; }
             <span class="app-card-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
           </div>
         </div>
-
-        <div class="app-card" onclick="showView('kaizen', null)">
+        <div class="app-card" onclick="showView('kaizen',null)">
           <div class="app-card-icon" style="background:var(--zx-teal-dim)">
-            <svg viewBox="0 0 24 24" fill="none" stroke="#14b8a6" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="var(--zx-teal)" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
           </div>
           <h3>Kaizen Manager</h3>
           <p>Registro y seguimiento de eventos de mejora continua</p>
@@ -547,10 +580,9 @@ body.is-admin .admin-only-flex { display: flex; }
             <span class="app-card-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
           </div>
         </div>
-
-        <div class="app-card" onclick="showView('refacciones', null)">
+        <div class="app-card" onclick="showView('refacciones',null)">
           <div class="app-card-icon" style="background:var(--zx-amber-dim)">
-            <svg viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="var(--zx-amber)" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>
           </div>
           <h3>Refacciones</h3>
           <p>Control de inventario y solicitudes de refacciones</p>
@@ -559,10 +591,9 @@ body.is-admin .admin-only-flex { display: flex; }
             <span class="app-card-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
           </div>
         </div>
-
-        <div class="app-card" onclick="showView('erp', null)">
+        <div class="app-card" onclick="showView('erp',null)">
           <div class="app-card-icon" style="background:var(--zx-coral-dim)">
-            <svg viewBox="0 0 24 24" fill="none" stroke="#f97316" stroke-width="2"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="var(--zx-coral)" stroke-width="2"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
           </div>
           <h3>Codificación ERP</h3>
           <p>Solicitud de alta de nuevos códigos en SAP Business One</p>
@@ -572,11 +603,10 @@ body.is-admin .admin-only-flex { display: flex; }
           </div>
         </div>
       </div>
-
       <div class="admin-only">
-        <p style="font-size:11px; font-weight:600; color:var(--zx-dim); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:12px;">Accesos rápidos admin</p>
-        <div style="display:flex; gap:10px; flex-wrap:wrap;">
-          <button class="btn-secondary" onclick="showView('usuarios', null)" style="font-size:13px; display:flex; align-items:center; gap:7px;">
+        <p style="font-size:11px;font-weight:600;color:var(--zx-dim);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:12px;">Accesos rápidos admin</p>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;">
+          <button class="btn-secondary" onclick="showView('usuarios',null)" style="font-size:13px;display:flex;align-items:center;gap:7px;">
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
             Gestionar usuarios
           </button>
@@ -584,91 +614,82 @@ body.is-admin .admin-only-flex { display: flex; }
       </div>
     </div>
 
-    <!-- ── VACACIONES ── -->
+    <!-- VACACIONES -->
     <div id="view-vacaciones" class="view">
-      <div class="view-header">
-        <h1>VacaManager</h1>
-        <p>La aplicación de vacaciones se abrirá en una nueva ventana</p>
-      </div>
+      <div class="view-header"><h1>VacaManager</h1><p>La aplicación se abrirá en una nueva pestaña</p></div>
       <div class="ext-apps-grid">
         <div class="ext-card" onclick="openApp('vacamanager')">
           <div class="ext-card-icon" style="background:var(--zx-blue-dim)">
-            <svg viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="var(--zx-blue)" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
           </div>
           <h3>Abrir VacaManager</h3>
           <p>Sistema de solicitud y aprobación de vacaciones</p>
         </div>
       </div>
-      <div class="card" style="margin-top:1.5rem; max-width:500px;">
+      <div class="card url-config-card">
         <div class="card-title">Configurar ruta del archivo</div>
         <div class="form-group">
           <label>URL o ruta de VacaManager</label>
           <input type="text" id="vaca-url" placeholder="./apps/vacamanager.html" value="./apps/vacamanager.html">
         </div>
-        <button class="btn-primary" onclick="saveAppUrl('vacamanager', 'vaca-url')">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+        <button class="btn-primary" onclick="saveAppUrl('vacamanager','vaca-url')">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
           Guardar ruta
         </button>
       </div>
     </div>
 
-    <!-- ── KAIZEN ── -->
+    <!-- KAIZEN -->
     <div id="view-kaizen" class="view">
-      <div class="view-header">
-        <h1>Kaizen Manager</h1>
-        <p>La aplicación de Kaizen se abrirá en una nueva ventana</p>
-      </div>
+      <div class="view-header"><h1>Kaizen Manager</h1><p>La aplicación se abrirá en una nueva pestaña</p></div>
       <div class="ext-apps-grid">
         <div class="ext-card" onclick="openApp('kaizen')">
           <div class="ext-card-icon" style="background:var(--zx-teal-dim)">
-            <svg viewBox="0 0 24 24" fill="none" stroke="#14b8a6" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="var(--zx-teal)" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
           </div>
           <h3>Abrir Kaizen Manager</h3>
           <p>Registro de eventos Short Kaizen y mejora continua</p>
         </div>
       </div>
-      <div class="card" style="margin-top:1.5rem; max-width:500px;">
+      <div class="card url-config-card">
         <div class="card-title">Configurar ruta del archivo</div>
         <div class="form-group">
           <label>URL o ruta de Kaizen Manager</label>
           <input type="text" id="kaizen-url" placeholder="./apps/kaizen-manager.html" value="./apps/kaizen-manager.html">
         </div>
-        <button class="btn-primary" onclick="saveAppUrl('kaizen', 'kaizen-url')">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+        <button class="btn-primary" onclick="saveAppUrl('kaizen','kaizen-url')">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
           Guardar ruta
         </button>
       </div>
     </div>
 
-    <!-- ── REFACCIONES ── -->
+    <!-- REFACCIONES -->
     <div id="view-refacciones" class="view">
-      <div class="view-header">
-        <h1>Refacciones</h1>
-        <p>La aplicación de Refacciones se abrirá en una nueva ventana</p>
-      </div>
+      <div class="view-header"><h1>Refacciones</h1><p>La aplicación se abrirá en una nueva pestaña</p></div>
       <div class="ext-apps-grid">
         <div class="ext-card" onclick="openApp('refacciones')">
           <div class="ext-card-icon" style="background:var(--zx-amber-dim)">
-            <svg viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="var(--zx-amber)" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>
           </div>
           <h3>Abrir Refacciones</h3>
           <p>Inventario y solicitudes de refacciones</p>
         </div>
       </div>
-      <div class="card" style="margin-top:1.5rem; max-width:500px;">
+      <div class="card url-config-card">
         <div class="card-title">Configurar ruta del archivo</div>
         <div class="form-group">
           <label>URL o ruta de Refacciones</label>
           <input type="text" id="refacciones-url" placeholder="./apps/refacciones.html" value="./apps/refacciones.html">
         </div>
-        <button class="btn-primary" onclick="saveAppUrl('refacciones', 'refacciones-url')">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+        <button class="btn-primary" onclick="saveAppUrl('refacciones','refacciones-url')">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
           Guardar ruta
         </button>
       </div>
     </div>
 
-    <!-- ── CODIFICACIÓN ERP ── -->
+    <!-- CODIFICACIÓN ERP -->
     <div id="view-erp" class="view">
       <div class="view-header">
         <h1>Codificación ERP</h1>
@@ -737,18 +758,17 @@ body.is-admin .admin-only-flex { display: flex; }
             <textarea id="erp-justificacion" placeholder="Describe para qué se usará este código, en qué proceso o proyecto..."></textarea>
           </div>
           <div class="form-group">
-            <label>Información adicional (especificaciones técnicas, proveedor sugerido, etc.)</label>
+            <label>Información adicional (especificaciones, proveedor sugerido, etc.)</label>
             <textarea id="erp-adicional" placeholder="Opcional..." style="min-height:60px;"></textarea>
           </div>
           <div class="btn-row">
             <button class="btn-primary" onclick="enviarSolicitudERP()">
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
               Enviar solicitud
             </button>
             <button class="btn-secondary" onclick="limpiarFormERP()">Limpiar</button>
           </div>
         </div>
-
         <div>
           <div class="card">
             <div class="card-title">Mis solicitudes recientes</div>
@@ -772,28 +792,23 @@ body.is-admin .admin-only-flex { display: flex; }
       </div>
     </div>
 
-    <!-- ── USUARIOS (ADMIN) ── -->
+    <!-- USUARIOS (ADMIN) -->
     <div id="view-usuarios" class="view admin-only">
       <div class="view-header">
         <h1>Gestión de usuarios</h1>
         <p>Administra los roles y accesos del portal</p>
       </div>
       <div class="card">
-        <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:1.25rem;">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1.25rem;">
           <div class="card-title" style="margin-bottom:0;">Usuarios registrados</div>
-          <button class="btn-primary" style="font-size:13px; padding:8px 14px;" onclick="showModal('modal-invite')">
+          <button class="btn-primary" style="font-size:13px;padding:8px 14px;" onclick="showModal('modal-invite')">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
             Invitar usuario
           </button>
         </div>
         <table class="users-table">
           <thead>
-            <tr>
-              <th>Usuario</th>
-              <th>Rol actual</th>
-              <th>Registrado</th>
-              <th>Acción</th>
-            </tr>
+            <tr><th>Usuario</th><th>Rol actual</th><th>Registrado</th><th>Acción</th></tr>
           </thead>
           <tbody id="users-tbody"></tbody>
         </table>
@@ -830,41 +845,39 @@ body.is-admin .admin-only-flex { display: flex; }
   </div>
 </div>
 
-<!-- TOASTS -->
 <div class="toast-container" id="toasts"></div>
 
 <script>
-// ══════════════════════════════
-// STATE
-// ══════════════════════════════
 let currentUser = null;
 let isAdmin = false;
-
-const appUrls = {
-  vacamanager: './apps/vacamanager.html',
-  kaizen: './apps/kaizen-manager.html',
-  refacciones: './apps/refacciones.html'
-};
-
+const appUrls = { vacamanager:'./apps/vacamanager.html', kaizen:'./apps/kaizen-manager.html', refacciones:'./apps/refacciones.html' };
 let users = [
-  { id:1, name:'Josue G. Martinez', email:'g.martinez@zubex.com.mx', role:'admin', initials:'JG', color:'#3b82f6', joined:'19 May 2026' },
-  { id:2, name:'Ana López',         email:'a.lopez@zubex.com.mx',    role:'admin', initials:'AL', color:'#14b8a6', joined:'19 May 2026' },
-  { id:3, name:'Carlos Mendoza',    email:'c.mendoza@zubex.com.mx',  role:'user',  initials:'CM', color:'#f59e0b', joined:'19 May 2026' },
-  { id:4, name:'Patricia Ruiz',     email:'p.ruiz@zubex.com.mx',     role:'user',  initials:'PR', color:'#a78bfa', joined:'19 May 2026' },
+  { id:1, name:'Josue G. Martinez', email:'g.martinez@zubex.com.mx', role:'admin', initials:'JG', color:'#2563eb', joined:'19 May 2026' },
+  { id:2, name:'Ana López',         email:'a.lopez@zubex.com.mx',    role:'admin', initials:'AL', color:'#0d9488', joined:'19 May 2026' },
+  { id:3, name:'Carlos Mendoza',    email:'c.mendoza@zubex.com.mx',  role:'user',  initials:'CM', color:'#d97706', joined:'19 May 2026' },
+  { id:4, name:'Patricia Ruiz',     email:'p.ruiz@zubex.com.mx',     role:'user',  initials:'PR', color:'#7c3aed', joined:'19 May 2026' },
 ];
-
 let erpSolicitudes = [];
 let nextErpId = 1001;
 
-// ══════════════════════════════
-// AUTH
-// ══════════════════════════════
+// ── THEME ──
+function toggleTheme() {
+  const html = document.documentElement;
+  const current = html.getAttribute('data-theme');
+  const next = current === 'light' ? 'dark' : 'light';
+  html.setAttribute('data-theme', next);
+  localStorage.setItem('zx-theme', next);
+}
+(function() {
+  const saved = localStorage.getItem('zx-theme');
+  if (saved) document.documentElement.setAttribute('data-theme', saved);
+})();
+
+// ── AUTH ──
 function loginWith(provider) {
-  // In production: Firebase signInWithPopup
-  toast('Conectando con ' + (provider === 'google' ? 'Google' : 'Microsoft') + '...', 'info');
+  toast('Conectando con ' + (provider==='google'?'Google':'Microsoft') + '...','info');
   setTimeout(() => loginDemo('admin'), 800);
 }
-
 function loginDemo(role) {
   isAdmin = role === 'admin';
   currentUser = {
@@ -883,10 +896,9 @@ function loginDemo(role) {
   document.getElementById('dash-greeting').textContent = 'Bienvenido, ' + currentUser.name.split(' ')[0];
   document.getElementById('dash-sub').textContent = isAdmin ? 'Depto. ERP · Administrador' : 'Usuario · Portal Zubex';
   const d = new Date();
-  document.getElementById('dash-date').textContent = d.toLocaleDateString('es-MX', { weekday:'short', day:'numeric', month:'short', year:'numeric' });
+  document.getElementById('dash-date').textContent = d.toLocaleDateString('es-MX',{weekday:'short',day:'numeric',month:'short',year:'numeric'});
   renderUsers();
 }
-
 function logout() {
   document.getElementById('screen-app').classList.remove('active');
   document.getElementById('screen-login').classList.add('active');
@@ -895,40 +907,28 @@ function logout() {
   showView('dashboard', null);
 }
 
-// ══════════════════════════════
-// NAVIGATION
-// ══════════════════════════════
+// ── NAV ──
 function showView(name, btn) {
   document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
   document.querySelectorAll('.sb-item').forEach(b => b.classList.remove('active'));
   const view = document.getElementById('view-' + name);
   if (view) view.classList.add('active');
   if (btn) btn.classList.add('active');
-  else {
-    document.querySelectorAll('.sb-item').forEach(b => {
-      if (b.getAttribute('onclick') && b.getAttribute('onclick').includes("'" + name + "'")) b.classList.add('active');
-    });
-  }
+  else document.querySelectorAll('.sb-item').forEach(b => {
+    if (b.getAttribute('onclick') && b.getAttribute('onclick').includes("'"+name+"'")) b.classList.add('active');
+  });
 }
 
-// ══════════════════════════════
-// OPEN EXTERNAL APPS
-// ══════════════════════════════
-function openApp(app) {
-  const url = appUrls[app];
-  window.open(url, '_blank');
-}
-
+// ── APPS ──
+function openApp(app) { window.open(appUrls[app], '_blank'); }
 function saveAppUrl(app, inputId) {
   const val = document.getElementById(inputId).value.trim();
-  if (!val) return toast('Ingresa una URL válida', 'error');
+  if (!val) return toast('Ingresa una URL válida','error');
   appUrls[app] = val;
-  toast('Ruta guardada correctamente', 'success');
+  toast('Ruta guardada correctamente','success');
 }
 
-// ══════════════════════════════
-// CODIFICACIÓN ERP
-// ══════════════════════════════
+// ── ERP ──
 function enviarSolicitudERP() {
   const tipo = document.getElementById('erp-tipo').value;
   const nombre = document.getElementById('erp-nombre').value.trim();
@@ -936,146 +936,109 @@ function enviarSolicitudERP() {
   const justificacion = document.getElementById('erp-justificacion').value.trim();
   const prioridad = document.getElementById('erp-prioridad').value;
   const um = document.getElementById('erp-um').value;
-
-  if (!tipo || !nombre || !area || !justificacion) {
-    toast('Por favor completa los campos obligatorios (*)', 'error');
-    return;
-  }
-
+  if (!tipo || !nombre || !area || !justificacion) return toast('Completa los campos obligatorios (*)','error');
   const sol = {
-    id: 'ERP-' + nextErpId++,
-    tipo, nombre, area, justificacion, prioridad, um,
+    id: 'ERP-'+nextErpId++, tipo, nombre, area, justificacion, prioridad, um,
     solicitante: currentUser.name,
-    fecha: new Date().toLocaleDateString('es-MX', { day:'numeric', month:'short', year:'numeric' }),
+    fecha: new Date().toLocaleDateString('es-MX',{day:'numeric',month:'short',year:'numeric'}),
     status: 'pending'
   };
-
   erpSolicitudes.unshift(sol);
   renderErpSolicitudes();
   limpiarFormERP();
-  toast('Solicitud ' + sol.id + ' enviada correctamente', 'success');
+  toast('Solicitud '+sol.id+' enviada correctamente','success');
 }
-
 function limpiarFormERP() {
-  ['erp-tipo','erp-area','erp-um','erp-prioridad'].forEach(id => document.getElementById(id).value = '');
-  ['erp-nombre','erp-justificacion','erp-adicional'].forEach(id => document.getElementById(id).value = '');
+  ['erp-tipo','erp-area','erp-um','erp-prioridad'].forEach(id => document.getElementById(id).value='');
+  ['erp-nombre','erp-justificacion','erp-adicional'].forEach(id => document.getElementById(id).value='');
 }
-
 function renderErpSolicitudes() {
   const cont = document.getElementById('erp-solicitudes');
-  const mine = isAdmin ? erpSolicitudes : erpSolicitudes.filter(s => s.solicitante === currentUser.name);
+  const mine = isAdmin ? erpSolicitudes : erpSolicitudes.filter(s => s.solicitante===currentUser.name);
   if (!mine.length) {
-    cont.innerHTML = '<div class="empty"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 12h6m-6 4h6m2 5H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5.586a1 1 0 0 1 .707.293l5.414 5.414a1 1 0 0 1 .293.707V19a2 2 0 0 1-2 2z"/></svg><p>No hay solicitudes aún</p></div>';
+    cont.innerHTML='<div class="empty"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 12h6m-6 4h6m2 5H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5.586a1 1 0 0 1 .707.293l5.414 5.414a1 1 0 0 1 .293.707V19a2 2 0 0 1-2 2z"/></svg><p>No hay solicitudes aún</p></div>';
     return;
   }
-  const statusLabel = { pending:'⏳ Pendiente', approved:'✓ Aprobado', rejected:'✗ Rechazado' };
-  const statusColor = { pending:'color:#f59e0b', approved:'color:#22c55e', rejected:'color:#ef4444' };
-  cont.innerHTML = mine.map(s => `
+  const sLabel = {pending:'⏳ Pendiente', approved:'✓ Aprobado', rejected:'✗ Rechazado'};
+  const sColor = {pending:'color:var(--zx-amber)', approved:'color:var(--zx-green)', rejected:'color:var(--zx-red)'};
+  cont.innerHTML = mine.map(s=>`
     <div class="sol-item ${s.status}">
       <div class="sol-item-head">
         <span class="sol-item-code">${s.id}</span>
-        <span class="sol-item-status" style="${statusColor[s.status]}">${statusLabel[s.status]}</span>
+        <span class="sol-item-status" style="${sColor[s.status]}">${sLabel[s.status]}</span>
       </div>
       <div class="sol-item-desc">${s.nombre}</div>
       <div class="sol-item-meta">${s.tipo} · ${s.area} · ${s.fecha}</div>
-      ${isAdmin && s.status === 'pending' ? `
-        <div style="display:flex;gap:6px;margin-top:8px;">
-          <button class="btn-primary" style="font-size:11px;padding:4px 10px;" onclick="updateErpStatus('${s.id}','approved')">Aprobar</button>
-          <button class="btn-secondary" style="font-size:11px;padding:4px 10px;" onclick="updateErpStatus('${s.id}','rejected')">Rechazar</button>
-        </div>` : ''}
+      ${isAdmin && s.status==='pending' ? `<div style="display:flex;gap:6px;margin-top:8px;">
+        <button class="btn-primary" style="font-size:11px;padding:4px 10px;" onclick="updateErpStatus('${s.id}','approved')">Aprobar</button>
+        <button class="btn-secondary" style="font-size:11px;padding:4px 10px;" onclick="updateErpStatus('${s.id}','rejected')">Rechazar</button>
+      </div>` : ''}
     </div>`).join('');
-
   if (isAdmin) {
-    const pending = erpSolicitudes.filter(s => s.status === 'pending');
+    const pending = erpSolicitudes.filter(s=>s.status==='pending');
     const adminCont = document.getElementById('erp-admin-pendientes');
-    if (!pending.length) {
-      adminCont.innerHTML = '<div class="empty"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg><p>Sin pendientes</p></div>';
-    } else {
-      adminCont.innerHTML = `<p style="font-size:13px;color:var(--zx-muted);">${pending.length} solicitud${pending.length>1?'es':''} esperando revisión</p>`;
-    }
+    adminCont.innerHTML = !pending.length
+      ? '<div class="empty"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg><p>Sin pendientes</p></div>'
+      : `<p style="font-size:13px;color:var(--zx-muted);">${pending.length} solicitud${pending.length>1?'es':''} esperando revisión</p>`;
   }
 }
-
 function updateErpStatus(id, status) {
-  const sol = erpSolicitudes.find(s => s.id === id);
+  const sol = erpSolicitudes.find(s=>s.id===id);
   if (sol) sol.status = status;
   renderErpSolicitudes();
-  toast(status === 'approved' ? 'Solicitud aprobada' : 'Solicitud rechazada', status === 'approved' ? 'success' : 'error');
+  toast(status==='approved'?'Solicitud aprobada':'Solicitud rechazada', status==='approved'?'success':'error');
 }
 
-// ══════════════════════════════
-// USERS
-// ══════════════════════════════
+// ── USERS ──
 function renderUsers() {
   const tbody = document.getElementById('users-tbody');
   if (!tbody) return;
-  tbody.innerHTML = users.map(u => `
+  tbody.innerHTML = users.map(u=>`
     <tr>
-      <td>
-        <div class="user-cell">
-          <div class="user-cell-avatar" style="background:${u.color}22;color:${u.color}">${u.initials}</div>
-          <div>
-            <div class="user-cell-name">${u.name}</div>
-            <div class="user-cell-email">${u.email}</div>
-          </div>
-        </div>
-      </td>
-      <td><span class="${u.role === 'admin' ? 'role-badge-admin' : 'role-badge-user'}">${u.role === 'admin' ? 'Admin' : 'Usuario'}</span></td>
+      <td><div class="user-cell">
+        <div class="user-cell-avatar" style="background:${u.color}18;color:${u.color}">${u.initials}</div>
+        <div><div class="user-cell-name">${u.name}</div><div class="user-cell-email">${u.email}</div></div>
+      </div></td>
+      <td><span class="${u.role==='admin'?'role-badge-admin':'role-badge-user'}">${u.role==='admin'?'Admin':'Usuario'}</span></td>
       <td style="color:var(--zx-muted);font-size:13px;">${u.joined}</td>
-      <td>
-        ${u.email !== currentUser?.email ? `
-        <button class="btn-role-toggle" onclick="toggleRole(${u.id})">
-          ${u.role === 'admin' ? 'Degradar a usuario' : 'Promover a admin'}
-        </button>` : '<span style="font-size:12px;color:var(--zx-dim);">Tú</span>'}
-      </td>
+      <td>${u.email!==currentUser?.email
+        ? `<button class="btn-role-toggle" onclick="toggleRole(${u.id})">${u.role==='admin'?'Degradar a usuario':'Promover a admin'}</button>`
+        : '<span style="font-size:12px;color:var(--zx-dim);">Tú</span>'}</td>
     </tr>`).join('');
 }
-
 function toggleRole(id) {
-  const u = users.find(x => x.id === id);
+  const u = users.find(x=>x.id===id);
   if (!u) return;
-  u.role = u.role === 'admin' ? 'user' : 'admin';
+  u.role = u.role==='admin'?'user':'admin';
   renderUsers();
-  toast(`${u.name.split(' ')[0]} ahora es ${u.role === 'admin' ? 'Administrador' : 'Usuario'}`, 'success');
+  toast(`${u.name.split(' ')[0]} ahora es ${u.role==='admin'?'Administrador':'Usuario'}`, 'success');
 }
-
 function inviteUser() {
   const email = document.getElementById('invite-email').value.trim();
   const role = document.getElementById('invite-role').value;
-  if (!email || !email.includes('@')) return toast('Ingresa un correo válido', 'error');
+  if (!email || !email.includes('@')) return toast('Ingresa un correo válido','error');
   const initials = email.split('@')[0].slice(0,2).toUpperCase();
-  const colors = ['#3b82f6','#14b8a6','#f59e0b','#a78bfa','#f97316','#22c55e'];
-  users.push({
-    id: users.length + 1,
-    name: email.split('@')[0],
-    email, role, initials,
-    color: colors[users.length % colors.length],
-    joined: new Date().toLocaleDateString('es-MX', { day:'numeric', month:'short', year:'numeric' })
-  });
+  const colors = ['#2563eb','#0d9488','#d97706','#7c3aed','#ea580c','#16a34a'];
+  users.push({ id:users.length+1, name:email.split('@')[0], email, role, initials, color:colors[users.length%colors.length], joined:new Date().toLocaleDateString('es-MX',{day:'numeric',month:'short',year:'numeric'}) });
   renderUsers();
   closeModal('modal-invite');
-  document.getElementById('invite-email').value = '';
-  toast('Usuario agregado: ' + email, 'success');
+  document.getElementById('invite-email').value='';
+  toast('Usuario agregado: '+email, 'success');
 }
 
-// ══════════════════════════════
-// MODAL
-// ══════════════════════════════
+// ── MODAL ──
 function showModal(id) { document.getElementById(id).classList.add('open'); }
 function closeModal(id) { document.getElementById(id).classList.remove('open'); }
-document.querySelectorAll('.modal-overlay').forEach(m => m.addEventListener('click', e => { if (e.target === m) m.classList.remove('open'); }));
+document.querySelectorAll('.modal-overlay').forEach(m => m.addEventListener('click', e => { if(e.target===m) m.classList.remove('open'); }));
 
-// ══════════════════════════════
-// TOAST
-// ══════════════════════════════
+// ── TOAST ──
 function toast(msg, type='info') {
   const cont = document.getElementById('toasts');
   const el = document.createElement('div');
-  el.className = 'toast ' + (type === 'success' ? 'success' : type === 'error' ? 'error' : '');
-  const icons = { success:'✓', error:'✕', info:'·' };
-  el.innerHTML = `<span>${icons[type]||'·'}</span> ${msg}`;
+  el.className = 'toast '+(type==='success'?'success':type==='error'?'error':'');
+  el.innerHTML = `<span>${{success:'✓',error:'✕',info:'·'}[type]||'·'}</span> ${msg}`;
   cont.appendChild(el);
-  setTimeout(() => el.remove(), 3200);
+  setTimeout(()=>el.remove(), 3200);
 }
 </script>
 </body>
