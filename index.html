@@ -240,7 +240,27 @@ input, select, textarea, button { font-family: inherit; }
 .sb-logout svg { width: 14px; height: 14px; display: block; }
 
 /* ══ MAIN ══ */
-.main { flex: 1; overflow-y: auto; }
+.main { flex: 1; overflow-y: auto; position: relative; }
+.main::before {
+  content: 'ZX';
+  position: fixed;
+  top: 50%; left: calc(50% + 112px);
+  transform: translate(-50%, -50%);
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: clamp(220px, 22vw, 340px);
+  font-weight: 600;
+  letter-spacing: -0.04em;
+  color: transparent;
+  -webkit-text-stroke: 2px rgba(37,99,235,0.10);
+  pointer-events: none;
+  user-select: none;
+  z-index: 0;
+  line-height: 1;
+}
+[data-theme="dark"] .main::before {
+  -webkit-text-stroke: 2px rgba(96,165,250,0.10);
+}
+.view { position: relative; z-index: 1; }
 .view { display: none; padding: 2rem 2.5rem; max-width: 1100px; }
 .view.active { display: block; }
 .view-header { margin-bottom: 2rem; }
@@ -558,7 +578,7 @@ body.is-admin .admin-only-flex { display: flex; }
       </div>
       <p style="font-size:11px;font-weight:600;color:var(--zx-dim);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:12px;">Mis aplicaciones</p>
       <div class="apps-grid">
-        <div class="app-card" onclick="showView('vacaciones',null)">
+        <div class="app-card" onclick="openApp('vacamanager')">
           <div class="app-card-icon" style="background:var(--zx-blue-dim)">
             <svg viewBox="0 0 24 24" fill="none" stroke="var(--zx-blue)" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
           </div>
@@ -569,7 +589,7 @@ body.is-admin .admin-only-flex { display: flex; }
             <span class="app-card-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
           </div>
         </div>
-        <div class="app-card" onclick="showView('kaizen',null)">
+        <div class="app-card" onclick="openApp('kaizen')">
           <div class="app-card-icon" style="background:var(--zx-teal-dim)">
             <svg viewBox="0 0 24 24" fill="none" stroke="var(--zx-teal)" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
           </div>
@@ -580,7 +600,7 @@ body.is-admin .admin-only-flex { display: flex; }
             <span class="app-card-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
           </div>
         </div>
-        <div class="app-card" onclick="showView('refacciones',null)">
+        <div class="app-card" onclick="openApp('refacciones')">
           <div class="app-card-icon" style="background:var(--zx-amber-dim)">
             <svg viewBox="0 0 24 24" fill="none" stroke="var(--zx-amber)" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>
           </div>
@@ -616,76 +636,43 @@ body.is-admin .admin-only-flex { display: flex; }
 
     <!-- VACACIONES -->
     <div id="view-vacaciones" class="view">
-      <div class="view-header"><h1>VacaManager</h1><p>La aplicación se abrirá en una nueva pestaña</p></div>
+      <div class="view-header"><h1>VacaManager</h1><p>Haz clic para abrir la aplicación en una nueva pestaña</p></div>
       <div class="ext-apps-grid">
         <div class="ext-card" onclick="openApp('vacamanager')">
           <div class="ext-card-icon" style="background:var(--zx-blue-dim)">
             <svg viewBox="0 0 24 24" fill="none" stroke="var(--zx-blue)" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
           </div>
           <h3>Abrir VacaManager</h3>
-          <p>Sistema de solicitud y aprobación de vacaciones</p>
+          <p>gamabet26.github.io/VacaionesZX</p>
         </div>
-      </div>
-      <div class="card url-config-card">
-        <div class="card-title">Configurar ruta del archivo</div>
-        <div class="form-group">
-          <label>URL o ruta de VacaManager</label>
-          <input type="text" id="vaca-url" placeholder="./apps/vacamanager.html" value="./apps/vacamanager.html">
-        </div>
-        <button class="btn-primary" onclick="saveAppUrl('vacamanager','vaca-url')">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
-          Guardar ruta
-        </button>
       </div>
     </div>
 
     <!-- KAIZEN -->
     <div id="view-kaizen" class="view">
-      <div class="view-header"><h1>Kaizen Manager</h1><p>La aplicación se abrirá en una nueva pestaña</p></div>
+      <div class="view-header"><h1>Kaizen Manager</h1><p>Haz clic para abrir la aplicación en una nueva pestaña</p></div>
       <div class="ext-apps-grid">
         <div class="ext-card" onclick="openApp('kaizen')">
           <div class="ext-card-icon" style="background:var(--zx-teal-dim)">
             <svg viewBox="0 0 24 24" fill="none" stroke="var(--zx-teal)" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
           </div>
           <h3>Abrir Kaizen Manager</h3>
-          <p>Registro de eventos Short Kaizen y mejora continua</p>
+          <p>gamabet26.github.io/KaizenZX</p>
         </div>
-      </div>
-      <div class="card url-config-card">
-        <div class="card-title">Configurar ruta del archivo</div>
-        <div class="form-group">
-          <label>URL o ruta de Kaizen Manager</label>
-          <input type="text" id="kaizen-url" placeholder="./apps/kaizen-manager.html" value="./apps/kaizen-manager.html">
-        </div>
-        <button class="btn-primary" onclick="saveAppUrl('kaizen','kaizen-url')">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
-          Guardar ruta
-        </button>
       </div>
     </div>
 
     <!-- REFACCIONES -->
     <div id="view-refacciones" class="view">
-      <div class="view-header"><h1>Refacciones</h1><p>La aplicación se abrirá en una nueva pestaña</p></div>
+      <div class="view-header"><h1>Refacciones</h1><p>Haz clic para abrir la aplicación en una nueva pestaña</p></div>
       <div class="ext-apps-grid">
         <div class="ext-card" onclick="openApp('refacciones')">
           <div class="ext-card-icon" style="background:var(--zx-amber-dim)">
             <svg viewBox="0 0 24 24" fill="none" stroke="var(--zx-amber)" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>
           </div>
           <h3>Abrir Refacciones</h3>
-          <p>Inventario y solicitudes de refacciones</p>
+          <p>gamabet26.github.io/ValesREF</p>
         </div>
-      </div>
-      <div class="card url-config-card">
-        <div class="card-title">Configurar ruta del archivo</div>
-        <div class="form-group">
-          <label>URL o ruta de Refacciones</label>
-          <input type="text" id="refacciones-url" placeholder="./apps/refacciones.html" value="./apps/refacciones.html">
-        </div>
-        <button class="btn-primary" onclick="saveAppUrl('refacciones','refacciones-url')">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
-          Guardar ruta
-        </button>
       </div>
     </div>
 
@@ -850,7 +837,7 @@ body.is-admin .admin-only-flex { display: flex; }
 <script>
 let currentUser = null;
 let isAdmin = false;
-const appUrls = { vacamanager:'./apps/vacamanager.html', kaizen:'./apps/kaizen-manager.html', refacciones:'./apps/refacciones.html' };
+const appUrls = { vacamanager:'https://gamabet26.github.io/VacaionesZX/', kaizen:'https://gamabet26.github.io/KaizenZX/', refacciones:'https://gamabet26.github.io/ValesREF/' };
 let users = [
   { id:1, name:'Josue G. Martinez', email:'g.martinez@zubex.com.mx', role:'admin', initials:'JG', color:'#2563eb', joined:'19 May 2026' },
   { id:2, name:'Ana López',         email:'a.lopez@zubex.com.mx',    role:'admin', initials:'AL', color:'#0d9488', joined:'19 May 2026' },
