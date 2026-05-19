@@ -105,7 +105,7 @@ input, select, textarea, button { font-family: inherit; }
   color: var(--zx-muted);
   font-size: 16px;
 }
-.theme-toggle:hover { transform: scale(1.08); color: var(--zx-text); }
+.theme-toggle:hover { transform: scale(1.13); color: var(--zx-text); }
 .icon-sun, .icon-moon { width: 18px; height: 18px; display: block; }
 [data-theme="light"] .icon-moon { display: none; }
 [data-theme="dark"] .icon-sun { display: none; }
@@ -241,6 +241,69 @@ input, select, textarea, button { font-family: inherit; }
 
 /* ══ MAIN ══ */
 .main { flex: 1; overflow-y: auto; position: relative; }
+
+/* ZX WATERMARK — behind everything */
+#zx-wm {
+  position: fixed;
+  top: 50%;
+  left: calc(50% + 112px);
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  user-select: none;
+  z-index: 0;
+  animation: zx-breathe 6s ease-in-out infinite;
+  opacity: 1;
+}
+@keyframes zx-breathe {
+  0%   { transform: translate(-50%,-50%) scale(1); }
+  50%  { transform: translate(-50%,-50%) scale(1.5); }
+  100% { transform: translate(-50%,-50%) scale(1); }
+}
+#zx-wm .zx-fill {
+  animation: zx-fill-pulse 6s ease-in-out infinite;
+}
+@keyframes zx-fill-pulse {
+  0%,100% { fill: rgba(37,99,235,0); }
+  50%      { fill: rgba(37,99,235,0.055); }
+}
+#zx-wm .zx-stroke {
+  fill: none;
+  stroke: rgba(37,99,235,0.18);
+  stroke-width: 1.5;
+  stroke-dasharray: 1400;
+  animation: zx-circuit 2.5s linear infinite;
+}
+#zx-wm .zx-stroke2 {
+  fill: none;
+  stroke: rgba(37,99,235,0.18);
+  stroke-width: 1.5;
+  stroke-dasharray: 1000;
+  animation: zx-circuit 2.5s linear infinite;
+  animation-delay: -1.25s;
+}
+@keyframes zx-circuit {
+  from { stroke-dashoffset: 1400; }
+  to   { stroke-dashoffset: 0; }
+}
+#zx-wm .zx-dot {
+  fill: rgba(37,99,235,0.75);
+  filter: url(#zxglow);
+}
+#zx-wm .zx-dot2 {
+  fill: rgba(37,99,235,0.75);
+  filter: url(#zxglow);
+}
+[data-theme="dark"] #zx-wm .zx-fill {
+  animation: zx-fill-pulse-dk 6s ease-in-out infinite;
+}
+[data-theme="dark"] #zx-wm .zx-stroke,
+[data-theme="dark"] #zx-wm .zx-stroke2 { stroke: rgba(96,165,250,0.22); }
+[data-theme="dark"] #zx-wm .zx-dot,
+[data-theme="dark"] #zx-wm .zx-dot2 { fill: rgba(96,165,250,0.85); }
+@keyframes zx-fill-pulse-dk {
+  0%,100% { fill: rgba(96,165,250,0); }
+  50%      { fill: rgba(96,165,250,0.055); }
+}
 .main::before {
   content: 'ZX';
   position: fixed;
@@ -256,11 +319,28 @@ input, select, textarea, button { font-family: inherit; }
   user-select: none;
   z-index: 0;
   line-height: 1;
+  animation: zx-breathe 6s ease-in-out infinite;
+  transform-origin: center center;
+}
+@keyframes zx-breathe {
+  0%   { transform: translate(-50%, -50%) scale(1);    -webkit-text-stroke-width: 2px; color: transparent; }
+  50%  { transform: translate(-50%, -50%) scale(1.35); -webkit-text-stroke-width: 0px;  color: rgba(37,99,235,0.07); }
+  100% { transform: translate(-50%, -50%) scale(1);    -webkit-text-stroke-width: 2px; color: transparent; }
+}
+[data-theme="dark"] .main::before {
+  animation: zx-breathe-dark 6s ease-in-out infinite;
+}
+@keyframes zx-breathe-dark {
+  0%   { transform: translate(-50%, -50%) scale(1);    -webkit-text-stroke-width: 2px; color: transparent; }
+  50%  { transform: translate(-50%, -50%) scale(1.35); -webkit-text-stroke-width: 0px;  color: rgba(96,165,250,0.07); }
+  100% { transform: translate(-50%, -50%) scale(1);    -webkit-text-stroke-width: 2px; color: transparent; }
 }
 [data-theme="dark"] .main::before {
   -webkit-text-stroke: 2px rgba(96,165,250,0.10);
 }
-.view { position: relative; z-index: 1; }
+.view { position: relative; z-index: 2; }
+.card, .dash-welcome, .ext-card, .app-card, .sidebar { position: relative; z-index: 2; }
+.card, .dash-welcome, .ext-card, .app-card { position: relative; z-index: 1; }
 .view { display: none; padding: 2rem 2.5rem; max-width: 1100px; }
 .view.active { display: block; }
 .view-header { margin-bottom: 2rem; }
@@ -566,6 +646,32 @@ body.is-admin .admin-only-flex { display: flex; }
 
   <!-- MAIN CONTENT -->
   <main class="main">
+    <svg id="zx-wm" width="520" height="260" viewBox="0 0 520 260" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <filter id="zxglow" x="-50%" y="-50%" width="200%" height="200%">
+          <feGaussianBlur stdDeviation="3" result="b"/>
+          <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+        </filter>
+      </defs>
+      <!-- Z fill -->
+      <path class="zx-fill" d="M18,18 L192,18 L192,56 L78,204 L192,204 L192,242 L18,242 L18,204 L132,56 L18,56 Z"/>
+      <!-- X fill -->
+      <path class="zx-fill" d="M222,18 L284,18 L322,88 L360,18 L422,18 L364,130 L422,242 L360,242 L322,172 L284,242 L222,242 L280,130 Z"/>
+      <!-- Z stroke circuit -->
+      <path class="zx-stroke" d="M18,18 L192,18 L192,56 L78,204 L192,204 L192,242 L18,242 L18,204 L132,56 L18,56 Z"/>
+      <!-- X stroke circuit -->
+      <path class="zx-stroke2" d="M222,18 L284,18 L322,88 L360,18 L422,18 L364,130 L422,242 L360,242 L322,172 L284,242 L222,242 L280,130 Z"/>
+      <!-- Moving dots -->
+      <circle class="zx-dot" r="5">
+        <animateMotion dur="2.5s" repeatCount="indefinite"
+          path="M18,18 L192,18 L192,56 L78,204 L192,204 L192,242 L18,242 L18,204 L132,56 L18,56 Z"/>
+      </circle>
+      <circle class="zx-dot2" r="5">
+        <animateMotion dur="2.5s" repeatCount="indefinite" begin="-1.25s"
+          path="M222,18 L284,18 L322,88 L360,18 L422,18 L364,130 L422,242 L360,242 L322,172 L284,242 L222,242 L280,130 Z"/>
+      </circle>
+    </svg>
+
 
     <!-- DASHBOARD -->
     <div id="view-dashboard" class="view active">
