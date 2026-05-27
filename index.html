@@ -619,6 +619,14 @@ body.is-admin .admin-only-flex { display: flex; }
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>
         Refacciones
       </button>
+      <button class="sb-item" onclick="showView('ztela',this)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+        Ztela 2 ZX
+      </button>
+      <button class="sb-item" onclick="showView('tablero',this)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="9" rx="1"/><rect x="14" y="3" width="7" height="5" rx="1"/><rect x="14" y="12" width="7" height="9" rx="1"/><rect x="3" y="16" width="7" height="5" rx="1"/></svg>
+        Tablero MP
+      </button>
       <button class="sb-item" onclick="showView('erp',this)">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
         Codificación ERP
@@ -717,6 +725,28 @@ body.is-admin .admin-only-flex { display: flex; }
             <span class="app-card-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
           </div>
         </div>
+        <div class="app-card" onclick="openApp('ztela')">
+          <div class="app-card-icon" style="background:var(--zx-purple-dim)">
+            <svg viewBox="0 0 24 24" fill="none" stroke="var(--zx-purple)" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+          </div>
+          <h3>Ztela 2 ZX</h3>
+          <p>Herramienta Ztela integrada al ecosistema Zubex</p>
+          <div class="app-card-footer">
+            <span class="badge badge-active">Activo</span>
+            <span class="app-card-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+          </div>
+        </div>
+        <div class="app-card" onclick="openApp('tablero')">
+          <div class="app-card-icon" style="background:var(--zx-teal-dim)">
+            <svg viewBox="0 0 24 24" fill="none" stroke="var(--zx-teal)" stroke-width="2"><rect x="3" y="3" width="7" height="9" rx="1"/><rect x="14" y="3" width="7" height="5" rx="1"/><rect x="14" y="12" width="7" height="9" rx="1"/><rect x="3" y="16" width="7" height="5" rx="1"/></svg>
+          </div>
+          <h3>Tablero MP</h3>
+          <p>Tablero de recibo para materia prima</p>
+          <div class="app-card-footer">
+            <span class="badge badge-active">Activo</span>
+            <span class="app-card-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+          </div>
+        </div>
         <div class="app-card" onclick="showView('erp',null)">
           <div class="app-card-icon" style="background:var(--zx-coral-dim)">
             <svg viewBox="0 0 24 24" fill="none" stroke="var(--zx-coral)" stroke-width="2"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
@@ -778,6 +808,34 @@ body.is-admin .admin-only-flex { display: flex; }
           </div>
           <h3>Abrir Refacciones</h3>
           <p>gamabet26.github.io/ValesREF</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ZTELA 2 ZX -->
+    <div id="view-ztela" class="view">
+      <div class="view-header"><h1>Ztela 2 ZX</h1><p>Haz clic para abrir la aplicación en una nueva pestaña</p></div>
+      <div class="ext-apps-grid">
+        <div class="ext-card" onclick="openApp('ztela')">
+          <div class="ext-card-icon" style="background:var(--zx-purple-dim)">
+            <svg viewBox="0 0 24 24" fill="none" stroke="var(--zx-purple)" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+          </div>
+          <h3>Abrir Ztela 2 ZX</h3>
+          <p>gamabet26.github.io/Ztela2ZX</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- TABLERO MP -->
+    <div id="view-tablero" class="view">
+      <div class="view-header"><h1>Tablero MP</h1><p>Tablero de recibo para materia prima — nueva pestaña</p></div>
+      <div class="ext-apps-grid">
+        <div class="ext-card" onclick="openApp('tablero')">
+          <div class="ext-card-icon" style="background:var(--zx-teal-dim)">
+            <svg viewBox="0 0 24 24" fill="none" stroke="var(--zx-teal)" stroke-width="2"><rect x="3" y="3" width="7" height="9" rx="1"/><rect x="14" y="3" width="7" height="5" rx="1"/><rect x="14" y="12" width="7" height="9" rx="1"/><rect x="3" y="16" width="7" height="5" rx="1"/></svg>
+          </div>
+          <h3>Abrir Tablero MP</h3>
+          <p>gamabet26.github.io/MP-Tablero</p>
         </div>
       </div>
     </div>
@@ -943,7 +1001,7 @@ body.is-admin .admin-only-flex { display: flex; }
 <script>
 let currentUser = null;
 let isAdmin = false;
-const appUrls = { vacamanager:'https://gamabet26.github.io/VacaionesZX/', kaizen:'https://gamabet26.github.io/KaizenZX/', refacciones:'https://gamabet26.github.io/ValesREF/' };
+const appUrls = { vacamanager:'https://gamabet26.github.io/VacaionesZX/', kaizen:'https://gamabet26.github.io/KaizenZX/', refacciones:'https://gamabet26.github.io/ValesREF/', ztela:'https://gamabet26.github.io/Ztela2ZX/', tablero:'https://gamabet26.github.io/MP-Tablero/' };
 let users = [
   { id:1, name:'Josue G. Martinez', email:'g.martinez@zubex.com.mx', role:'admin', initials:'JG', color:'#2563eb', joined:'19 May 2026' },
   { id:2, name:'Ana López',         email:'a.lopez@zubex.com.mx',    role:'admin', initials:'AL', color:'#0d9488', joined:'19 May 2026' },
